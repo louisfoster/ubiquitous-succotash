@@ -7,4 +7,4 @@ Of course, I'm always learning. Read and engage as you would reading another per
 
 ### Contents
 
-[Start](/start)
+[Start](./start)

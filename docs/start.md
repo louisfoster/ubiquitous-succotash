@@ -100,4 +100,4 @@ Before I continue, this is a list of things to do next
 2. Texture floor/get shadow from box
 3. Interact with another object
 
-[Home](/)
+[Home](./)
