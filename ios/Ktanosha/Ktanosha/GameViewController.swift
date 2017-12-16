@@ -15,47 +15,90 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create a new scene
-        let scene = SCNScene(named: "art.scnassets/world.scn")!
+        // create our first scene
+        let scene1 = SCNScene()
         
         // create and add a camera to the scene
-//        let cameraNode = SCNNode()
-//        cameraNode.camera = SCNCamera()
-//        scene.rootNode.addChildNode(cameraNode)
+        let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        scene1.rootNode.addChildNode(cameraNode)
         
         // place the camera
-//        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
+        cameraNode.position = SCNVector3(x: 5, y: 10, z: 5)
         
-        // create and add a light to the scene
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-        scene.rootNode.addChildNode(lightNode)
+        // create and add an omni light to the scene
+        let omniLightNode = SCNNode()
+        omniLightNode.light = SCNLight()
+        omniLightNode.light!.type = .omni
+        omniLightNode.position = SCNVector3(x: 0, y: 10, z: 10)
+        scene1.rootNode.addChildNode(omniLightNode)
         
         // create and add an ambient light to the scene
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
         ambientLightNode.light!.type = .ambient
         ambientLightNode.light!.color = UIColor.darkGray
-        scene.rootNode.addChildNode(ambientLightNode)
+        scene1.rootNode.addChildNode(ambientLightNode)
         
-        // retrieve the box node
-//        let box = scene.rootNode.childNode(withName: "box", recursively: true)!
-//        let forward = box.
+        // Create our placeholder player avatar (box)
+        let boxGeo = SCNBox()
         
-        // animate the 3d object
-//        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
+        // Assign a colour material for each side of the box
+        let colors = [UIColor.green, // front
+            UIColor.red, // right
+            UIColor.blue, // back
+            UIColor.yellow, // left
+            UIColor.purple, // top
+            UIColor.gray] // bottom
+        
+        let sideMaterials = colors.map { color -> SCNMaterial in
+            let material = SCNMaterial()
+            material.diffuse.contents = color
+            material.locksAmbientWithDiffuse = true
+            return material
+        }
+        
+        boxGeo.materials = sideMaterials
+        
+        let box = SCNNode(geometry: boxGeo)
+        box.castsShadow = false // No shadow (at least for now)
+        box.position = SCNVector3(x: 0, y: 0.5, z: 0) // This will sit on the plane
+        
+        scene1.rootNode.addChildNode(box)
+        
+        // The camera node should automatically angle from its position towards the box for "tracking"
+        cameraNode.look(at: box.position)
+        
+        // Plane geo for our "world"
+        let planeGeo = SCNPlane(width: 100, height: 100)
+        
+        // Add an irregular looking image texture so movement is obvious
+        let planeMaterial = SCNMaterial()
+        planeMaterial.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
+        planeMaterial.diffuse.wrapS = .repeat
+        planeMaterial.diffuse.wrapT = .repeat
+        planeMaterial.diffuse.contentsTransform = SCNMatrix4MakeScale(10, 10, 0)
+
+        planeGeo.firstMaterial = planeMaterial
+        
+        let plane = SCNNode(geometry: planeGeo)
+        let rotateBy = -90 / 180 * Double.pi // Angle to make plane flat
+        plane.rotation = SCNVector4(1, 0, 0, rotateBy)
+        
+        scene1.rootNode.addChildNode(plane)
+        
+        
+        // animate the 3d object, keeping this for reference
+        // ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
         
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         
         // set the scene to the view
-        scnView.scene = scene
+        scnView.scene = scene1
         
         // allows the user to manipulate the camera
-        scnView.allowsCameraControl = false
-        
+        scnView.allowsCameraControl = true
         
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
@@ -63,7 +106,7 @@ class GameViewController: UIViewController {
         // configure the view
         scnView.backgroundColor = UIColor.black
         
-        // add a tap gesture recognizer
+        // add a tap gesture recognizer, keeping for reference
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
     }

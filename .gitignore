@@ -1,4 +1,7 @@
 .idea
 docs/_site
 xcuserdata
+*/xcuserdata/*
 .DS_Store
+*.xcuserdata*
+*xcworkspace/xcuserdata/*
