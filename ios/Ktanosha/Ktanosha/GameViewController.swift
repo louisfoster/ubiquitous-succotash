@@ -11,37 +11,74 @@ import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
+    
+    // MARK: Properties
+    
+    // Harness holds the relative position for the avatar and camera, as well as takes user input
+    let avatarHarness: Harness = Harness()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // create our first scene
         let scene1 = SCNScene()
         
+        
+        /**
+         * Top level node, the "environment" aka earthly plane
+         */
+        // Plane geo for our "world"
+        let planeGeo = SCNPlane(width: 100, height: 100)
+        
+        // Add an irregular looking image texture so movement is obvious
+        let planeMaterial = SCNMaterial()
+        planeMaterial.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
+        planeMaterial.diffuse.wrapS = .repeat
+        planeMaterial.diffuse.wrapT = .repeat
+        planeMaterial.diffuse.contentsTransform = SCNMatrix4MakeScale(10, 10, 0)
+        
+        planeGeo.firstMaterial = planeMaterial
+        
+        let plane = SCNNode(geometry: planeGeo)
+        let rotateBy = -90 / 180 * Double.pi // Angle to make plane flat
+        plane.rotation = SCNVector4(1, 0, 0, rotateBy)
+        
+        scene1.rootNode.addChildNode(plane)
+        
+        
+        
+        /**
+         * Top level node, the avatar/camera harness
+         */
+        // The harness is just an empty node
+        scene1.rootNode.addChildNode(avatarHarness)
+        
+        // Starts at a given point, in this case, the global origin
+        avatarHarness.position = SCNVector3(x: 0, y: 0, z: 0)
+        
+        
+        /**
+         * Harness child node, the camera, remains at a fixed location relative to the harness origin's location and rotation
+         */
         // create and add a camera to the scene
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        scene1.rootNode.addChildNode(cameraNode)
+        let camera = SCNNode()
+        camera.camera = SCNCamera()
+        avatarHarness.addChildNode(camera)
         
-        // place the camera
-        cameraNode.position = SCNVector3(x: 5, y: 10, z: 5)
+        // position the camera relative to the harness
+        camera.position = SCNVector3(x: 0, y: 10, z: 5)
+        // The camera node should automatically angle from its position towards the center of the harness for "tracking"
+        camera.look(at: avatarHarness.position)
         
-        // create and add an omni light to the scene
-        let omniLightNode = SCNNode()
-        omniLightNode.light = SCNLight()
-        omniLightNode.light!.type = .omni
-        omniLightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-        scene1.rootNode.addChildNode(omniLightNode)
         
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor.darkGray
-        scene1.rootNode.addChildNode(ambientLightNode)
+        
+        /**
+         * Harness child node, the avatar (containing the box geometry), is located at the origin of the harness
+         */
         
         // Create our placeholder player avatar (box)
-        let boxGeo = SCNBox()
+        let boxGeometry = SCNBox()
         
         // Assign a colour material for each side of the box
         let colors = [UIColor.green, // front
@@ -58,38 +95,38 @@ class GameViewController: UIViewController {
             return material
         }
         
-        boxGeo.materials = sideMaterials
+        boxGeometry.materials = sideMaterials
         
-        let box = SCNNode(geometry: boxGeo)
-        box.castsShadow = false // No shadow (at least for now)
-        box.position = SCNVector3(x: 0, y: 0.5, z: 0) // This will sit on the plane
-        
-        scene1.rootNode.addChildNode(box)
-        
-        // The camera node should automatically angle from its position towards the box for "tracking"
-        cameraNode.look(at: box.position)
-        
-        // Plane geo for our "world"
-        let planeGeo = SCNPlane(width: 100, height: 100)
-        
-        // Add an irregular looking image texture so movement is obvious
-        let planeMaterial = SCNMaterial()
-        planeMaterial.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
-        planeMaterial.diffuse.wrapS = .repeat
-        planeMaterial.diffuse.wrapT = .repeat
-        planeMaterial.diffuse.contentsTransform = SCNMatrix4MakeScale(10, 10, 0)
-
-        planeGeo.firstMaterial = planeMaterial
-        
-        let plane = SCNNode(geometry: planeGeo)
-        let rotateBy = -90 / 180 * Double.pi // Angle to make plane flat
-        plane.rotation = SCNVector4(1, 0, 0, rotateBy)
-        
-        scene1.rootNode.addChildNode(plane)
+        let avatar = SCNNode(geometry: boxGeometry)
+        avatar.castsShadow = false // No shadow (at least for now)
+        avatarHarness.addChildNode(avatar)
+        avatar.position = SCNVector3(x: 0, y: 0.5, z: 0) // This will sit on the plane
         
         
-        // animate the 3d object, keeping this for reference
-        // ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
+        
+        /**
+         * Lights, for now, are top level nodes
+         */
+        
+        // create and add an omni light to the scene
+        let omniLightNode = SCNNode()
+        omniLightNode.light = SCNLight()
+        omniLightNode.light!.type = .omni
+        omniLightNode.position = SCNVector3(x: 0, y: 10, z: 10)
+        scene1.rootNode.addChildNode(omniLightNode)
+        
+        // create and add an ambient light to the scene
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = SCNLight()
+        ambientLightNode.light!.type = .ambient
+        ambientLightNode.light!.color = UIColor.darkGray
+        scene1.rootNode.addChildNode(ambientLightNode)
+        
+        
+        
+        /**
+         * Setup for the scene view
+         */
         
         // retrieve the SCNView
         let scnView = self.view as! SCNView
@@ -98,19 +135,70 @@ class GameViewController: UIViewController {
         scnView.scene = scene1
         
         // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
+        scnView.allowsCameraControl = false
         
         // show statistics such as fps and timing information
-        scnView.showsStatistics = true
+        scnView.showsStatistics = false
         
         // configure the view
         scnView.backgroundColor = UIColor.black
         
-        // add a tap gesture recognizer, keeping for reference
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        scnView.addGestureRecognizer(tapGesture)
+        
+        
+        /**
+         * Set up gesture recognition
+         * Each swipe direction requires it's own recogniser but can call the same selector
+         */
+        
+        // Swipe left (right to left)
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        leftSwipe.direction = .left
+        scnView.addGestureRecognizer(leftSwipe)
+        
+        // Swipe right (left to right)
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        rightSwipe.direction = .right
+        scnView.addGestureRecognizer(rightSwipe)
+        
+        // Swipe up (bottom to top)
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        upSwipe.direction = .up
+        scnView.addGestureRecognizer(upSwipe)
+        
+        // Swip down (top to bottom)
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        downSwipe.direction = .down
+        scnView.addGestureRecognizer(downSwipe)
+        
     }
     
+    
+    /// Handle the 4 different swipe directions
+    ///
+    /// - Parameter swipeRecognize: the provided swipe gesture being recognised
+    @objc func handleSwipe(_ swipeRecognize: UISwipeGestureRecognizer) {
+        
+        // Pass the swipe directions onto the harness for movement/rotations
+        switch swipeRecognize.direction {
+        case .up:
+            avatarHarness.moveHarnessForward()
+            break
+        case .down:
+            avatarHarness.moveHarnessBack()
+            break
+        case .left:
+            avatarHarness.rotateHarnessLeft()
+            break
+        case .right:
+            avatarHarness.rotateHarnessRight()
+            break
+        default:
+            return
+        }
+        
+    }
+    
+    /* Keeping for future reference
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         // retrieve the SCNView
@@ -146,6 +234,7 @@ class GameViewController: UIViewController {
             SCNTransaction.commit()
         }
     }
+    */
     
     override var shouldAutorotate: Bool {
         return true
@@ -161,11 +250,6 @@ class GameViewController: UIViewController {
         } else {
             return .all
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
     }
 
 }

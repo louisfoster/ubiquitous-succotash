@@ -42,7 +42,7 @@ Ok, I can't really be bothered to copy the discussions here because there are pl
 
 That wasn't so bad, however I encountered a few issues when trying to apply the image material to the plane and get it to repeat in the way I had it while using the scene kit editor. Being able to look at the code and manipulate that instead of some funky drag and drop UI with input areas and whatnot really makes a difference and I didn't quite find the editor as intuitive as I hoped. The thing is, the code for swift and it's various libraries and APIs are fairly clear, so I think I prefer doing it that way anyway. I used [this SO question](https://stackoverflow.com/questions/44920519/repeating-a-texture-over-a-plane-in-scenekit) to figure out how to apply the texture. Basically, my issue was over the confusing while setting the `planeMaterial.diffuse.contents` property. I was trying to use what I thought was correct, that is, by creating a `SCNMaterialProperty` and handling the image there. This was incorrect, the image gets passed as a `UIImage` directly to the `planeMaterial.diffuse.contents` property, like so:
 
-```Swift
+```swift
 let planeMaterial = SCNMaterial()
 planeMaterial.diffuse.contents = UIImage(named: "art.scnassets/texture.png")
 planeMaterial.diffuse.wrapS = .repeat

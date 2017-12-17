@@ -15,6 +15,7 @@
 		DE6D86BC1FE3D9C100DAE038 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE6D86BA1FE3D9C100DAE038 /* LaunchScreen.storyboard */; };
 		DE6D86C71FE3D9C300DAE038 /* KtanoshaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D86C61FE3D9C300DAE038 /* KtanoshaTests.swift */; };
 		DE6D86D21FE3D9C300DAE038 /* KtanoshaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D86D11FE3D9C300DAE038 /* KtanoshaUITests.swift */; };
+		DE9C6AA11FE680CE00E49383 /* Harness.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C6AA01FE680CE00E49383 /* Harness.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		DE6D86CD1FE3D9C300DAE038 /* KtanoshaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KtanoshaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE6D86D11FE3D9C300DAE038 /* KtanoshaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KtanoshaUITests.swift; sourceTree = "<group>"; };
 		DE6D86D31FE3D9C300DAE038 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE9C6AA01FE680CE00E49383 /* Harness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Harness.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				DE6D86AF1FE3D9C100DAE038 /* AppDelegate.swift */,
 				DE6D86B11FE3D9C100DAE038 /* art.scnassets */,
 				DE6D86B31FE3D9C100DAE038 /* GameViewController.swift */,
+				DE9C6AA01FE680CE00E49383 /* Harness.swift */,
 				DE6D86B51FE3D9C100DAE038 /* Main.storyboard */,
 				DE6D86B81FE3D9C100DAE038 /* Assets.xcassets */,
 				DE6D86BA1FE3D9C100DAE038 /* LaunchScreen.storyboard */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE9C6AA11FE680CE00E49383 /* Harness.swift in Sources */,
 				DE6D86B41FE3D9C100DAE038 /* GameViewController.swift in Sources */,
 				DE6D86B01FE3D9C100DAE038 /* AppDelegate.swift in Sources */,
 			);
