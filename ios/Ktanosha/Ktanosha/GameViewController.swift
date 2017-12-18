@@ -67,7 +67,7 @@ class GameViewController: UIViewController {
         avatarHarness.addChildNode(camera)
         
         // position the camera relative to the harness
-        camera.position = SCNVector3(x: 0, y: 10, z: 5)
+        camera.position = SCNVector3(x: 0, y: 6, z: 6)
         // The camera node should automatically angle from its position towards the center of the harness for "tracking"
         camera.look(at: avatarHarness.position)
         
@@ -79,6 +79,8 @@ class GameViewController: UIViewController {
         
         // Create our placeholder player avatar (box)
         let boxGeometry = SCNBox()
+        
+        
         
         // Assign a colour material for each side of the box
         let colors = [UIColor.green, // front
