@@ -25,6 +25,23 @@ Everyone has their own method to coming up with a design for a character. I thin
 ![uinput1]({{ "./assets/uinput1.gif" | absolute_url}})
 
 
+#### Sketches
+
+While putting together some sketches, I was watching [this talk](https://vimeo.com/22963088) by Will Wright (creator of The Sims). He paraphrases Sid Meier (creator of Civilisation) in saying, "give the player a rich set of decisions" in the context of provided gameplay with a large amount of considerations that collapse into this decision set. That's just one take of game design, but interesting to note nonetheless.
+
+The sketches I completed could be more dense and complete, more fleshed out and much more exploratory. However, I want to keep the _swift_ momentum of this project going, so I kinda used my own biases with fascinating character design to hone in on something that was the right combination of weird and funny without being totally creepy or gross. I really like to draw quadrupeds and strange faces. Also incorrect anatomy is also cool. I've kept anything that could be considered too risque out of the design due to this project's possible end goal being an attempted release to the app store (why not?) and I want to avoid rejection by Apple's strict standards.
+
+Side note, I also came across [this](http://preshing.com/20171218/how-to-write-your-own-cpp-game-engine/) today on hacker news. Engines, fun, but why C++? Maybe it discusses it somewhere in the article, I didn't really read all of it 👽 ah! aliens!
+
+![uinput1]({{ "./assets/sketches1.jpg" | absolute_url}})
+
+As you can see, my style is somewhat demented. There isn't so much depth here beyond something that looks fascinating. Maybe big eyes is cool for art because it can be more expressive, and I tend to fall slightly on the realistic side of cartooning (like a close up in Ren and Stimpy) and also tend to avoid pointless detail for low poly modeling and texturing (flatter noses, no ears or real muscle or bone definition and no protruding hair) as well as trying to move from something cliched to something totally absurd then scaling it back until I feel comfortable. Also finding a design I can draw repeatedly with a formula of repeatable lines is great for transforming a 2D idea into something 3D and more life-like.
+
+Alright, maybe there is some preference and technique in the sketches and decision making. However, the main thing missing is time for developing the idea further. Back in Industrial Design school, we were expected to put out 10s to about a hundred sketches a day (and prove it) and then whittle it down to maybe 30 professional-quality presentation sketch boards (these would require different angles, context, colouring, annotations, scales, decomposition and our own personal header/name box.) I was so sick of the whole thing after doing it for a year straight (the preceding three years were a variety of classes, so the workload wasn't always that intense for subject) that I threw most of my stuff away. However carrying around thousands of sketches wasn't logistically sound and it's why I now do most of my sketches in small journals or using a tablet and some graphics software.
+
+Talking about Industrial Design, time for some 3D! I will be using [Blender](https://www.blender.org/).
+
+
 #### TBC
 
 
