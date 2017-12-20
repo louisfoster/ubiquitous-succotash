@@ -42,7 +42,20 @@ Alright, maybe there is some preference and technique in the sketches and decisi
 Talking about Industrial Design, time for some 3D! I will be using [Blender](https://www.blender.org/).
 
 
-#### TBC
+#### Blendered
+
+Blender (contradictory to what most people say) is pretty easy to use and learn. There's heaps of cool features and countless only tutorials (free) that are just a search away. There are obviously some key principles to learn just like any other piece of software and domain of knowledge, but it's all relatively easy to pick up and it's all quite practical so you can do as you learn, which is called kinesthetic learning or something.
+
+The first step is to create half of the model in a rudimentary form, and this will then get mirrored and subdivided by a modifier. Most of the design comes from simply thinking about the best way to do something with the least amount of polygons. Here is the model so far:
+
+
+![3dmodel1]({{ "./assets/3dmodel1.png" | absolute_url}})
+
+
+To get to this stage was fairly quick, and to me, it already looks very close to the drawing (and this is without any "guide" drawings) minus the "chest arm," which will be next in the process. I think the whole model might end up being a little over 3000 verts. This shouldn't be an issue for the GPU at all. Once we have the arm, then it is just a matter of texturing the creature (so it doesn't looks like some creepy clay model) and giving it an armature to be animated.
+
+I also just noticed, comparing the shape of the face to the drawings, there should be more of a "concerned snarl" in the brow and eye lids, and the cheeks currently looks really skeletal rather than the rounded puffy cheek bones in the sketch. The body is super close though, barring the random left arm appendage on the sternum. The name for the creature at the moment is Pataralaxa, which I believe is Enochian for 'rock'. 
+
 
 
 [Home](./)
