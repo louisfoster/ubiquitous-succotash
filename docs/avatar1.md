@@ -56,6 +56,30 @@ To get to this stage was fairly quick, and to me, it already looks very close to
 
 I also just noticed, comparing the shape of the face to the drawings, there should be more of a "concerned snarl" in the brow and eye lids, and the cheeks currently looks really skeletal rather than the rounded puffy cheek bones in the sketch. The body is super close though, barring the random left arm appendage on the sternum. The name for the creature at the moment is Pataralaxa, which I believe is Enochian for 'rock'. 
 
+Getting an arm to protrude from the chest isn't so hard, however, creating a nice looking low-poly hand was/is for me. I've resolve to find something online instead, which has a license that allows for commericial use with no more than attribution. I have found this [Hand (low poly)](https://sketchfab.com/models/d6c802a74a174c8c805deb20186d1877) by [Anura](https://sketchfab.com/anura), licensed under CC [Attribution](http://creativecommons.org/licenses/by/4.0/). I will need to import it into blender alongside my current model and possibly fix up my model's arm to suit the hand. It connected quite well to the arm, and with some tweaking the model has begun to look as desired. I have utilised this [advice](https://blender.stackexchange.com/questions/31467/how-to-reduce-vertex-count-on-a-mesh) to reduce the vertex count on the eye spheres.
+
+
+![3dmodel2]({{ "./assets/3dmodel2.png" | absolute_url}})
+
+
+The model then needs its seams marked and a placeholder texture applied (overlaying areas which share similar textures etc) with significant areas painting distinctive colors. The node editor needs to be used so that the correct texture can be viewed in the editor. The image is then exported into Krita, like so:
+
+
+![3dmodeltex1]({{ "./assets/3dmodeltex1.png" | absolute_url}})
+
+ 
+ Layers are added to build up the coloured appearance for various parts of the model(s). Then, to check or to do a final export, the original texture created from blender is overwritten and reloaded in blender. This is the result I will be working with:
+
+
+![3dmodeltex2]({{ "./assets/3dmodeltex2.png" | absolute_url}})
+
+
+Sure, the character looks pretty basic compared to some games out there, but the focus here isn't to create the perfect looking character, just something that is acceptable and fits the sketches done within then shortest amount of time (also, it is currently the end of year period where time is scarce).
+
+Now we have a character, the next steps are:
+- Import the textured model into the app to replace the box
+- Rig and create animations for the model and import them into the app
+- Figure out our character's "story"
 
 
 [Home](./)
